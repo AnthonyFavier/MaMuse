@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Puzzle 2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Puzzle 2: Trivia Time!</h2>
+    <p>Where did we first meet?</p>
+    <button onclick="checkAnswer('library')">At the library</button><br>
+    <button onclick="checkAnswer('cafe')">At the café</button><br>
+    <button onclick="checkAnswer('park')">At the park</button><br>
+    <p id="result"></p>
+
+    <script>
+        function checkAnswer(choice) {
+            if (choice === "cafe") {
+                document.getElementById("result").innerHTML = "Correct! ☕<br><a href='final.html'>See the final surprise</a>";
+            } else {
+                document.getElementById("result").innerText = "Not quite! Try again!";
+            }
+        }
+    </script>
+</body>
+</html>

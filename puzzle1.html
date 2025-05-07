@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Puzzle 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Puzzle 1: Word Unscramble</h2>
+    <p>Unscramble this word: <strong>FNULSOERW</strong></p>
+    <input type="text" id="answer">
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="result"></p>
+    <script>
+        function checkAnswer() {
+            const answer = document.getElementById("answer").value.toLowerCase();
+            if (answer === "sunflower") {
+                document.getElementById("result").innerHTML = "Correct! 🌻<br><a href='memory1.html'>See the memory</a>";
+            } else {
+                document.getElementById("result").innerText = "Try again!";
+            }
+        }
+    </script>
+</body>
+</html>
