@@ -77,15 +77,21 @@
   <h1>Reveal Our Memories</h1>
 
   <div class="puzzle-container">
-    <div class="puzzle-title">Memory #1</div>
+    <div class="puzzle-title">Je t'aime car tu es:</div>
     <div id="puzzle1" class="puzzle"></div>
     <div id="message1" class="message">You've revealed the first memory! 💖</div>
   </div>
 
   <div class="puzzle-container">
-    <div class="puzzle-title">Memory #2</div>
+    <div class="puzzle-title">Car tu es aussi:</div>
     <div id="puzzle2" class="puzzle"></div>
     <div id="message2" class="message">You've revealed the second memory! 🌟</div>
+  </div>
+
+  <div class="puzzle-container">
+    <div class="puzzle-title">Mais aussi car tu es:</div>
+    <div id="puzzle3" class="puzzle"></div>
+    <div id="message3" class="message">You've revealed the third memory! 🌟</div>
   </div>
 
   <script>
@@ -140,9 +146,17 @@
       "Lost & found", "First snow", "Puzzle night", "The toast",
       "Shooting star", "Campfire", "Warm socks", "Goodnight kiss"
     ];
+    
+    const tileTexts3 = [
+      "Sunrise walk", "Silly song", "Wildflowers", "Picnic spot",
+      "That hug", "The postcard", "Late coffee", "Photo shoot",
+      "Lost & found", "First snow", "Puzzle night", "The toast",
+      "Shooting star", "Campfire", "Warm socks", "Goodnight kiss"
+    ];
 
     createPuzzle("puzzle1", "message1", "memory.jpg", tileTexts1);
     createPuzzle("puzzle2", "message2", "memory2.png", tileTexts2);
+    createPuzzle("puzzle3", "message2", "memory2.png", tileTexts3);
   </script>
 </body>
 </html>
