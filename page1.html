@@ -57,6 +57,14 @@
       font-size: 16px;
       display: none;
     }
+
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    .overlay.fade-out {
+        animation: fadeOut 0.6s forwards;
+    }
   </style>
 </head>
 <body>
@@ -96,11 +104,14 @@
 
           piece.addEventListener('click', function () {
             if (!piece.classList.contains('revealed')) {
-              piece.classList.add('revealed');
-              revealedCount++;
-              if (revealedCount === totalPieces) {
-                message.style.display = 'block';
-              }
+              overlay.classList.add('fade-out')
+              setTimeout(() => {
+                piece.classList.add('revealed');
+                revealedCount++;
+                if (revealedCount === totalPieces) {
+                    message.style.display = 'block';
+                }
+              }, 600); // wait for fade-out to complete
             }
           });
 
