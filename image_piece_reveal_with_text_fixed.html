@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Piece-by-Piece Image Reveal with Text</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff8f0;
+            text-align: center;
+            padding: 40px;
+        }
+        #puzzle {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(4, 100px);
+            gap: 2px;
+            margin: 20px auto;
+            width: 408px;
+        }
+        .piece {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-image: url('memory.jpg');
+            background-size: 400px 400px;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            transition: filter 0.3s ease;
+        }
+        .overlay {
+            position: absolute;
+            inset: 0;
+            /* background-color: #fff8f0; */
+            background-color: rgb(255, 100, 100);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+        }
+        .revealed .overlay {
+            display: none;
+        }
+        .revealed {
+            filter: none;
+        }
+        #message {
+            margin-top: 30px;
+            font-size: 18px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reveal the Memory</h1>
+    <p>Click each tile to uncover both a clue and part of the memory.</p>
+    <div id="puzzle"></div>
+    <div id="message">You've revealed the whole memory! What a beautiful moment. 💖</div>
+
+    <script>
+        const puzzle = document.getElementById('puzzle');
+        let revealedCount = 0;
+        const totalPieces = 16;
+
+        const tileTexts = [
+            // "Our song", "Rainy walk", "Your smile", "Café latte",
+            // "Books we shared", "That movie", "Silly dance", "Starry sky",
+            // "Bumpy road", "Cozy hug", "Inside joke", "Your laugh",
+            // "That look", "The scarf", "Board game", "Sunset kiss"
+            "Gentille",
+            "Attentionnée",
+            "Douce",
+            "Drôle",
+            "Belle",
+            "Sexy",
+            "Rayonnante",
+            "Créative",
+            "Attachante",
+            "Mignonne",
+            "Généreuse",
+            "Empathique",
+            "Tendre",
+            "Chaleureuse",
+            "Souriante",
+            "Apaisante",
+            
+            "Ambitieuse",
+            "Naturelle",
+            "Réconfortante",
+        ];
+
+        let index = 0;
+
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 4; col++) {
+                const piece = document.createElement('div');
+                piece.classList.add('piece');
+                piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+
+                const overlay = document.createElement('div');
+                overlay.classList.add('overlay');
+                overlay.textContent = tileTexts[index++];
+                piece.appendChild(overlay);
+
+                piece.addEventListener('click', function () {
+                    if (!piece.classList.contains('revealed')) {
+                        piece.classList.add('revealed');
+                        revealedCount++;
+                        if (revealedCount === totalPieces) {
+                            document.getElementById('message').style.display = 'block';
+                        }
+                    }
+                });
+
+                puzzle.appendChild(piece);
+            }
+        }
+    </script>
+</body>
+</html>
