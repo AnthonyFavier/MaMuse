@@ -21,7 +21,7 @@
       display: grid;
       grid-template-columns: repeat(4, 100px);
       grid-template-rows: repeat(4, 100px);
-      gap: 2px;
+      gap: 1px;
       margin: 20px auto;
       width: 408px;
     }
@@ -32,12 +32,15 @@
       background-size: 400px 400px;
       background-repeat: no-repeat;
       cursor: pointer;
-      transition: filter 0.3s ease;
+      transition: filter 0.6s ease, border 0.6s ease; /* fade border too */
+      border: 2px solid #333; /* visible border */
+      border-radius: 6px; /* rounded corners */
+      box-sizing: border-box;
     }
     .overlay {
       position: absolute;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgb(14, 182, 70);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -45,12 +48,15 @@
       font-weight: bold;
       text-align: center;
       padding: 5px;
+      border-radius: 6px; /* match tile corners */
+      /* font-size: 14px; */
     }
     .revealed .overlay {
       display: none;
     }
     .revealed {
       filter: none;
+      border-color: transparent; /* border disappears */
     }
     .message {
       margin-top: 20px;
@@ -105,6 +111,7 @@
           piece.addEventListener('click', function () {
             if (!piece.classList.contains('revealed')) {
               overlay.classList.add('fade-out')
+              piece.style.borderColor = 'transparent'; // start fading the border immediately
               setTimeout(() => {
                 piece.classList.add('revealed');
                 revealedCount++;
