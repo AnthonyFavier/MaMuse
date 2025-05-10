@@ -1,123 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Birthday du Love</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fff8f0;
-            text-align: center;
-            padding: 40px;
-        }
-        #puzzle {
-            display: grid;
-            grid-template-columns: repeat(4, 100px);
-            grid-template-rows: repeat(4, 100px);
-            gap: 2px;
-            margin: 20px auto;
-            width: 408px;
-        }
-        .piece {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            background-image: url('memory.jpg');
-            background-size: 400px 400px;
-            background-repeat: no-repeat;
-            cursor: pointer;
-            transition: filter 0.3s ease;
-        }
-        .overlay {
-            position: absolute;
-            inset: 0;
-            /* background-color: #fff8f0; */
-            background-color: rgb(255, 100, 100);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-            text-align: center;
-            padding: 5px;
-        }
-        .revealed .overlay {
-            display: none;
-        }
-        .revealed {
-            filter: none;
-        }
-        #message {
-            margin-top: 30px;
-            font-size: 18px;
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Double Memory Reveal</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff8f0;
+      text-align: center;
+      padding: 40px;
+    }
+    .puzzle-container {
+      margin-bottom: 60px;
+    }
+    .puzzle-title {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    .puzzle {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-template-rows: repeat(4, 100px);
+      gap: 2px;
+      margin: 20px auto;
+      width: 408px;
+    }
+    .piece {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-size: 400px 400px;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      padding: 5px;
+    }
+    .revealed .overlay {
+      display: none;
+    }
+    .revealed {
+      filter: none;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 16px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <h1>Reveal the Memory</h1>
-    <p>Click each tile to uncover both a clue and part of the memory.</p>
-    <div id="puzzle"></div>
-    <div id="message">You've revealed the whole memory! What a beautiful moment. 💖</div>
+  <h1>Reveal Our Memories</h1>
 
-    <script>
-        const puzzle = document.getElementById('puzzle');
-        let revealedCount = 0;
-        const totalPieces = 16;
+  <div class="puzzle-container">
+    <div class="puzzle-title">Memory #1</div>
+    <div id="puzzle1" class="puzzle"></div>
+    <div id="message1" class="message">You've revealed the first memory! 💖</div>
+  </div>
 
-        const tileTexts = [
-            // "Our song", "Rainy walk", "Your smile", "Café latte",
-            // "Books we shared", "That movie", "Silly dance", "Starry sky",
-            // "Bumpy road", "Cozy hug", "Inside joke", "Your laugh",
-            // "That look", "The scarf", "Board game", "Sunset kiss"
-            "Gentille",
-            "Attentionnée",
-            "Douce",
-            "Drôle",
-            "Belle",
-            "Sexy",
-            "Rayonnante",
-            "Créative",
-            "Attachante",
-            "Mignonne",
-            "Généreuse",
-            "Empathique",
-            "Tendre",
-            "Chaleureuse",
-            "Souriante",
-            "Apaisante",
-            
-            "Ambitieuse",
-            "Naturelle",
-            "Réconfortante",
-        ];
+  <div class="puzzle-container">
+    <div class="puzzle-title">Memory #2</div>
+    <div id="puzzle2" class="puzzle"></div>
+    <div id="message2" class="message">You've revealed the second memory! 🌟</div>
+  </div>
 
-        let index = 0;
+  <script>
+    function createPuzzle(puzzleId, messageId, imageUrl, tileTexts) {
+      const puzzle = document.getElementById(puzzleId);
+      const message = document.getElementById(messageId);
+      let revealedCount = 0;
+      const totalPieces = 16;
 
-        for (let row = 0; row < 4; row++) {
-            for (let col = 0; col < 4; col++) {
-                const piece = document.createElement('div');
-                piece.classList.add('piece');
-                piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+      let index = 0;
+      for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+          const piece = document.createElement('div');
+          piece.classList.add('piece');
+          piece.style.backgroundImage = `url('${imageUrl}')`;
+          piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
 
-                const overlay = document.createElement('div');
-                overlay.classList.add('overlay');
-                overlay.textContent = tileTexts[index++];
-                piece.appendChild(overlay);
+          const overlay = document.createElement('div');
+          overlay.classList.add('overlay');
+          overlay.textContent = tileTexts[index++];
+          piece.appendChild(overlay);
 
-                piece.addEventListener('click', function () {
-                    if (!piece.classList.contains('revealed')) {
-                        piece.classList.add('revealed');
-                        revealedCount++;
-                        if (revealedCount === totalPieces) {
-                            document.getElementById('message').style.display = 'block';
-                        }
-                    }
-                });
-
-                puzzle.appendChild(piece);
+          piece.addEventListener('click', function () {
+            if (!piece.classList.contains('revealed')) {
+              piece.classList.add('revealed');
+              revealedCount++;
+              if (revealedCount === totalPieces) {
+                message.style.display = 'block';
+              }
             }
+          });
+
+          puzzle.appendChild(piece);
         }
-    </script>
+      }
+    }
+
+    const tileTexts1 = [
+      "First day", "That smile", "Pizza night", "Your drawing",
+      "Funny face", "Big laugh", "Park bench", "Socks story",
+      "Morning light", "Long talk", "Secret handshake", "Lego tower",
+      "Goofy hat", "Dancing rain", "Hug moment", "Fireplace chat"
+    ];
+
+    const tileTexts2 = [
+      "Sunrise walk", "Silly song", "Wildflowers", "Picnic spot",
+      "That hug", "The postcard", "Late coffee", "Photo shoot",
+      "Lost & found", "First snow", "Puzzle night", "The toast",
+      "Shooting star", "Campfire", "Warm socks", "Goodnight kiss"
+    ];
+
+    createPuzzle("puzzle1", "message1", "memory.jpg", tileTexts1);
+    createPuzzle("puzzle2", "message2", "memory2.png", tileTexts2);
+  </script>
 </body>
 </html>
