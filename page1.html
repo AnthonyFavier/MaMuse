@@ -19,16 +19,16 @@
     }
     .puzzle {
       display: grid;
-      grid-template-columns: repeat(4, 100px);
-      grid-template-rows: repeat(4, 100px);
+      grid-template-columns: repeat(2, 200px);
+      grid-template-rows: repeat(2, 200px);
       gap: 1px;
       margin: 20px auto;
       width: 408px;
     }
     .piece {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 200px;
+      height: 200px;
       background-size: 400px 400px;
       background-repeat: no-repeat;
       cursor: pointer;
@@ -74,16 +74,16 @@
   </style>
 </head>
 <body>
-  <h1>Reveal Our Memories</h1>
+  <h1>Je t'aime</h1>
 
   <div class="puzzle-container">
-    <div class="puzzle-title">Je t'aime car tu es:</div>
+    <div class="puzzle-title">Car tu es:</div>
     <div id="puzzle1" class="puzzle"></div>
     <div id="message1" class="message">You've revealed the first memory! 💖</div>
   </div>
 
   <div class="puzzle-container">
-    <div class="puzzle-title">Car tu es aussi:</div>
+    <div class="puzzle-title">Aussi car tu es:</div>
     <div id="puzzle2" class="puzzle"></div>
     <div id="message2" class="message">You've revealed the second memory! 🌟</div>
   </div>
@@ -102,12 +102,12 @@
       const totalPieces = 16;
 
       let index = 0;
-      for (let row = 0; row < 4; row++) {
-        for (let col = 0; col < 4; col++) {
+      for (let row = 0; row < 2; row++) {
+        for (let col = 0; col < 2; col++) {
           const piece = document.createElement('div');
           piece.classList.add('piece');
           piece.style.backgroundImage = `url('${imageUrl}')`;
-          piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+          piece.style.backgroundPosition = `-${col * 200}px -${row * 200}px`;
 
           const overlay = document.createElement('div');
           overlay.classList.add('overlay');
@@ -133,30 +133,93 @@
       }
     }
 
+    // "Gentille",
+    // "Attentionnée",
+    // "Douce",
+    // "Drôle",
+    // "Belle",
+    // "Sexy",
+    // "Rayonnante",
+    // "Créative",
+    // "Attachante",
+    // "Mignonne",
+    // "Généreuse",
+    // "Empathique",
+    // "Tendre",
+    // "Chaleureuse",
+    // "Souriante",
+    // "Apaisante",
+    
+    // "Ambitieuse",
+    // "Naturelle",
+    // "Réconfortante",
+
+
+
+
     const tileTexts1 = [
-      "First day", "That smile", "Pizza night", "Your drawing",
-      "Funny face", "Big laugh", "Park bench", "Socks story",
-      "Morning light", "Long talk", "Secret handshake", "Lego tower",
-      "Goofy hat", "Dancing rain", "Hug moment", "Fireplace chat"
+      "Gentille",
+      // "Attentionnée",
+      "Douce",
+      // "Drôle",
+      // "Belle",
+      // "Sexy",
+      // "Rayonnante",
+      // "Créative",
+      // "Attachante",
+      "Mignonne",
+      // "Généreuse",
+      // "Empathique",
+      // "Tendre",
+      "Chaleureuse",
+      // "Souriante",
+      // "Apaisante",
+      
+      // "Ambitieuse",
+      // "Naturelle",
+      // "Réconfortante",
     ];
+    createPuzzle("puzzle1", "message1", "photos/matchac.jpg", tileTexts1);
 
     const tileTexts2 = [
-      "Sunrise walk", "Silly song", "Wildflowers", "Picnic spot",
-      "That hug", "The postcard", "Late coffee", "Photo shoot",
-      "Lost & found", "First snow", "Puzzle night", "The toast",
-      "Shooting star", "Campfire", "Warm socks", "Goodnight kiss"
+      // "Gentille",
+      // "Attentionnée",
+      // "Douce",
+      // "Drôle",
+      "Belle",
+      // "Sexy",
+      "Rayonnante",
+      // "Créative",
+      "Attachante",
+      // "Mignonne",
+      // "Généreuse",
+      // "Empathique",
+      // "Tendre",
+      // "Chaleureuse",
+      "Souriante",
+      // "Apaisante",
+      
+      // "Ambitieuse",
+      // "Naturelle",
+      // "Réconfortante",
     ];
+    createPuzzle("puzzle2", "message2", "photos/etang2c.jpg", tileTexts2);
     
     const tileTexts3 = [
-      "Sunrise walk", "Silly song", "Wildflowers", "Picnic spot",
-      "That hug", "The postcard", "Late coffee", "Photo shoot",
-      "Lost & found", "First snow", "Puzzle night", "The toast",
-      "Shooting star", "Campfire", "Warm socks", "Goodnight kiss"
+      // "Attentionnée",
+      // "Drôle",
+      // "Sexy",
+      // "Créative",
+      // "Généreuse",
+      // "Empathique",
+      // "Tendre",
+      // "Apaisante",
+      
+      // "Ambitieuse",
+      // "Naturelle",
+      // "Réconfortante",
     ];
-
-    createPuzzle("puzzle1", "message1", "memory.jpg", tileTexts1);
-    createPuzzle("puzzle2", "message2", "memory2.png", tileTexts2);
-    createPuzzle("puzzle3", "message2", "memory2.png", tileTexts3);
+    createPuzzle("puzzle3", "message2", "photos/memory2.jpg", tileTexts3);
   </script>
 </body>
 </html>
