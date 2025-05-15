@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Double Memory Reveal</title>
+  <title>Memory Reveals</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -10,216 +10,97 @@
       text-align: center;
       padding: 40px;
     }
-    .puzzle-container {
-      margin-bottom: 60px;
+
+    h1 {
+      margin-bottom: 40px;
     }
-    .puzzle-title {
-      font-size: 20px;
-      margin: 10px 0;
-    }
-    .puzzle {
+
+    .gallery {
       display: grid;
       grid-template-columns: repeat(2, 200px);
-      grid-template-rows: repeat(2, 200px);
-      gap: 1px;
-      margin: 20px auto;
-      width: 408px;
+      gap: 30px;
+      justify-content: center;
     }
-    .piece {
+
+    .image-wrapper {
       position: relative;
       width: 200px;
-      height: 200px;
-      background-size: 400px 400px;
-      background-repeat: no-repeat;
-      cursor: pointer;
-      transition: filter 0.6s ease, border 0.6s ease; /* fade border too */
-      border: 2px solid #333; /* visible border */
-      border-radius: 6px; /* rounded corners */
-      box-sizing: border-box;
+      height: 300px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid #333;
     }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: blur(0px); /* initially blurred */
+      /* transform-origin: top left; */
+    }
+
     .overlay {
       position: absolute;
       inset: 0;
-      background-color: rgb(14, 182, 70);
+      background-color: rgba(14, 182, 70, 0.336);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: white;
-      font-weight: bold;
       text-align: center;
-      padding: 5px;
-      border-radius: 6px; /* match tile corners */
-      /* font-size: 14px; */
-    }
-    .revealed .overlay {
-      display: none;
-    }
-    .revealed {
-      filter: none;
-      border-color: transparent; /* border disappears */
-    }
-    .message {
-      margin-top: 20px;
-      font-size: 16px;
-      display: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 16px;
+      transition: opacity 0.6s ease, border-color 0.6s ease;
     }
 
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
-    }
     .overlay.fade-out {
-        animation: fadeOut 0.6s forwards;
+      opacity: 0;
+      border-color: transparent;
+      pointer-events: none;
+    }
+
+    .image-wrapper.revealed img {
+      filter: blur(0); /* remove blur on reveal */
     }
   </style>
 </head>
+
 <body>
-  <h1>Je t'aime</h1>
-
-  <div class="puzzle-container">
-    <div class="puzzle-title">Car tu es:</div>
-    <div id="puzzle1" class="puzzle"></div>
-    <div id="message1" class="message">You've revealed the first memory! 💖</div>
-  </div>
-
-  <div class="puzzle-container">
-    <div class="puzzle-title">Aussi car tu es:</div>
-    <div id="puzzle2" class="puzzle"></div>
-    <div id="message2" class="message">You've revealed the second memory! 🌟</div>
-  </div>
-
-  <div class="puzzle-container">
-    <div class="puzzle-title">Mais aussi car tu es:</div>
-    <div id="puzzle3" class="puzzle"></div>
-    <div id="message3" class="message">You've revealed the third memory! 🌟</div>
+  <h1>Je t'aime car tu es:</h1>
+  <div class="gallery">
+    <div class="image-wrapper">
+      <img src="ALL/attentionnee.jpg" style="object-position: 50% 50%; transform: scale(1.0);">
+      <!-- <div class="overlay">Attentionnée</div> -->
+    </div>
+    <div class="image-wrapper">
+      <img src="ALL/eeee.jpg" style="object-position: 50% 50%; transform: scale(1.0);">
+      <!-- <div class="overlay">Belle</div> -->
+    </div>
+    <div class="image-wrapper">
+      <img src="ALL/matcha.jpg" style="object-position: 50% 100%; transform: scale(1.0);">
+      <!-- <div class="overlay">Douce</div> -->
+    </div>
+    <div class="image-wrapper">
+      <img src="ALL/rayonnante.jpg" style="transform: scale(2.0) translate(-4%, -2%);">
+      <!-- <div class="overlay">Rayonnante</div> -->
+    </div>
   </div>
 
   <script>
-    function createPuzzle(puzzleId, messageId, imageUrl, tileTexts) {
-      const puzzle = document.getElementById(puzzleId);
-      const message = document.getElementById(messageId);
-      let revealedCount = 0;
-      const totalPieces = 16;
-
-      let index = 0;
-      for (let row = 0; row < 2; row++) {
-        for (let col = 0; col < 2; col++) {
-          const piece = document.createElement('div');
-          piece.classList.add('piece');
-          piece.style.backgroundImage = `url('${imageUrl}')`;
-          piece.style.backgroundPosition = `-${col * 200}px -${row * 200}px`;
-
-          const overlay = document.createElement('div');
-          overlay.classList.add('overlay');
-          overlay.textContent = tileTexts[index++];
-          piece.appendChild(overlay);
-
-          piece.addEventListener('click', function () {
-            if (!piece.classList.contains('revealed')) {
-              overlay.classList.add('fade-out')
-              piece.style.borderColor = 'transparent'; // start fading the border immediately
-              setTimeout(() => {
-                piece.classList.add('revealed');
-                revealedCount++;
-                if (revealedCount === totalPieces) {
-                    message.style.display = 'block';
-                }
-              }, 600); // wait for fade-out to complete
-            }
-          });
-
-          puzzle.appendChild(piece);
-        }
-      }
-    }
-
-    // "Gentille",
-    // "Attentionnée",
-    // "Douce",
-    // "Drôle",
-    // "Belle",
-    // "Sexy",
-    // "Rayonnante",
-    // "Créative",
-    // "Attachante",
-    // "Mignonne",
-    // "Généreuse",
-    // "Empathique",
-    // "Tendre",
-    // "Chaleureuse",
-    // "Souriante",
-    // "Apaisante",
-    
-    // "Ambitieuse",
-    // "Naturelle",
-    // "Réconfortante",
-
-
-
-
-    const tileTexts1 = [
-      "Gentille",
-      // "Attentionnée",
-      "Douce",
-      // "Drôle",
-      // "Belle",
-      // "Sexy",
-      // "Rayonnante",
-      // "Créative",
-      // "Attachante",
-      "Mignonne",
-      // "Généreuse",
-      // "Empathique",
-      // "Tendre",
-      "Chaleureuse",
-      // "Souriante",
-      // "Apaisante",
-      
-      // "Ambitieuse",
-      // "Naturelle",
-      // "Réconfortante",
-    ];
-    createPuzzle("puzzle1", "message1", "photos/matchac.jpg", tileTexts1);
-
-    const tileTexts2 = [
-      // "Gentille",
-      // "Attentionnée",
-      // "Douce",
-      // "Drôle",
-      "Belle",
-      // "Sexy",
-      "Rayonnante",
-      // "Créative",
-      "Attachante",
-      // "Mignonne",
-      // "Généreuse",
-      // "Empathique",
-      // "Tendre",
-      // "Chaleureuse",
-      "Souriante",
-      // "Apaisante",
-      
-      // "Ambitieuse",
-      // "Naturelle",
-      // "Réconfortante",
-    ];
-    createPuzzle("puzzle2", "message2", "photos/etang2c.jpg", tileTexts2);
-    
-    const tileTexts3 = [
-      // "Attentionnée",
-      // "Drôle",
-      // "Sexy",
-      // "Créative",
-      // "Généreuse",
-      // "Empathique",
-      // "Tendre",
-      // "Apaisante",
-      
-      // "Ambitieuse",
-      // "Naturelle",
-      // "Réconfortante",
-    ];
-    createPuzzle("puzzle3", "message2", "photos/memory2.jpg", tileTexts3);
+    document.querySelectorAll('.overlay').forEach(overlay => {
+      overlay.addEventListener('click', () => {
+        overlay.classList.add('fade-out');
+        overlay.parentElement.classList.add('revealed'); // remove blur
+      });
+    });
   </script>
+
+    <button onclick="window.location.href='page2.html'" style="margin-top: 40px; padding: 10px 20px; font-size: 16px; border-radius: 8px; border: none; background-color: #333; color: white; cursor: pointer;">
+    Go to the next surprise
+  </button>
 </body>
 </html>

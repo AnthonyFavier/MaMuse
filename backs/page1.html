@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Double Memory Reveal</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff8f0;
+      text-align: center;
+      padding: 40px;
+    }
+    .puzzle-container {
+      margin-bottom: 60px;
+    }
+    .puzzle-title {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    .puzzle {
+      display: grid;
+      grid-template-columns: repeat(2, 200px);
+      grid-template-rows: repeat(2, 200px);
+      gap: 1px;
+      margin: 20px auto;
+      width: 408px;
+    }
+    .piece {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background-size: 400px 400px;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      transition: filter 0.6s ease, border 0.6s ease; /* fade border too */
+      border: 2px solid #333; /* visible border */
+      border-radius: 6px; /* rounded corners */
+      box-sizing: border-box;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgb(14, 182, 70);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      padding: 5px;
+      border-radius: 6px; /* match tile corners */
+      /* font-size: 14px; */
+    }
+    .revealed .overlay {
+      display: none;
+    }
+    .revealed {
+      filter: none;
+      border-color: transparent; /* border disappears */
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 16px;
+      display: none;
+    }
+
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    .overlay.fade-out {
+        animation: fadeOut 0.6s forwards;
+    }
+  </style>
+</head>
+<body>
+  <h1>Je t'aime</h1>
+
+  <div class="puzzle-container">
+    <div class="puzzle-title">Car tu es:</div>
+    <div id="puzzle1" class="puzzle"></div>
+    <div id="message1" class="message">You've revealed the first memory! 💖</div>
+  </div>
+
+  <div class="puzzle-container">
+    <div class="puzzle-title">Aussi car tu es:</div>
+    <div id="puzzle2" class="puzzle"></div>
+    <div id="message2" class="message">You've revealed the second memory! 🌟</div>
+  </div>
+
+  <div class="puzzle-container">
+    <div class="puzzle-title">Mais aussi car tu es:</div>
+    <div id="puzzle3" class="puzzle"></div>
+    <div id="message3" class="message">You've revealed the third memory! 🌟</div>
+  </div>
+
+  <script>
+    function createPuzzle(puzzleId, messageId, imageUrl, tileTexts) {
+      const puzzle = document.getElementById(puzzleId);
+      const message = document.getElementById(messageId);
+      let revealedCount = 0;
+      const totalPieces = 16;
+
+      let index = 0;
+      for (let row = 0; row < 2; row++) {
+        for (let col = 0; col < 2; col++) {
+          const piece = document.createElement('div');
+          piece.classList.add('piece');
+          piece.style.backgroundImage = `url('${imageUrl}')`;
+          piece.style.backgroundPosition = `-${col * 200}px -${row * 200}px`;
+
+          const overlay = document.createElement('div');
+          overlay.classList.add('overlay');
+          overlay.textContent = tileTexts[index++];
+          piece.appendChild(overlay);
+
+          piece.addEventListener('click', function () {
+            if (!piece.classList.contains('revealed')) {
+              overlay.classList.add('fade-out')
+              piece.style.borderColor = 'transparent'; // start fading the border immediately
+              setTimeout(() => {
+                piece.classList.add('revealed');
+                revealedCount++;
+                if (revealedCount === totalPieces) {
+                    message.style.display = 'block';
+                }
+              }, 600); // wait for fade-out to complete
+            }
+          });
+
+          puzzle.appendChild(piece);
+        }
+      }
+    }
+
+    // "Gentille",
+    // "Attentionnée",
+    // "Douce",
+    // "Drôle",
+    // "Belle",
+    // "Sexy",
+    // "Rayonnante",
+    // "Créative",
+    // "Attachante",
+    // "Mignonne",
+    // "Généreuse",
+    // "Empathique",
+    // "Tendre",
+    // "Chaleureuse",
+    // "Souriante",
+    // "Apaisante",
+    
+    // "Ambitieuse",
+    // "Naturelle",
+    // "Réconfortante",
+
+
+
+
+    const tileTexts1 = [
+      "Gentille",
+      // "Attentionnée",
+      "Douce",
+      // "Drôle",
+      // "Belle",
+      // "Sexy",
+      // "Rayonnante",
+      // "Créative",
+      // "Attachante",
+      "Mignonne",
+      // "Généreuse",
+      // "Empathique",
+      // "Tendre",
+      "Chaleureuse",
+      // "Souriante",
+      // "Apaisante",
+      
+      // "Ambitieuse",
+      // "Naturelle",
+      // "Réconfortante",
+    ];
+    createPuzzle("puzzle1", "message1", "photos/matchac.jpg", tileTexts1);
+
+    const tileTexts2 = [
+      // "Gentille",
+      // "Attentionnée",
+      // "Douce",
+      // "Drôle",
+      "Belle",
+      // "Sexy",
+      "Rayonnante",
+      // "Créative",
+      "Attachante",
+      // "Mignonne",
+      // "Généreuse",
+      // "Empathique",
+      // "Tendre",
+      // "Chaleureuse",
+      "Souriante",
+      // "Apaisante",
+      
+      // "Ambitieuse",
+      // "Naturelle",
+      // "Réconfortante",
+    ];
+    createPuzzle("puzzle2", "message2", "photos/etang2c.jpg", tileTexts2);
+    
+    const tileTexts3 = [
+      // "Attentionnée",
+      // "Drôle",
+      // "Sexy",
+      // "Créative",
+      // "Généreuse",
+      // "Empathique",
+      // "Tendre",
+      // "Apaisante",
+      
+      // "Ambitieuse",
+      // "Naturelle",
+      // "Réconfortante",
+    ];
+    createPuzzle("puzzle3", "message2", "photos/memory2.jpg", tileTexts3);
+  </script>
+</body>
+</html>

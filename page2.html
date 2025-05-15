@@ -25,7 +25,7 @@
     .image-wrapper {
       position: relative;
       width: 200px;
-      height: 200px;
+      height: 300px;
       border-radius: 16px;
       overflow: hidden;
       border: 2px solid #333;
@@ -36,12 +36,13 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: blur(12px); /* initially blurred */
     }
 
     .overlay {
       position: absolute;
       inset: 0;
-      background-color: rgba(0, 0, 0, 1);
+      background-color: rgba(14, 182, 70, 0.336);
       color: white;
       font-size: 16px;
       font-weight: bold;
@@ -60,26 +61,31 @@
       border-color: transparent;
       pointer-events: none;
     }
+
+    .image-wrapper.revealed img {
+      filter: blur(0); /* remove blur on reveal */
+    }
   </style>
 </head>
+
 <body>
-  <h1>Click to Reveal the Memories</h1>
+  <h1>Je t'aime car tu es:</h1>
   <div class="gallery">
     <div class="image-wrapper">
-      <img src="photos/chapeau.jpg" alt="Memory 1">
-      <div class="overlay">Our first walk</div>
+      <img src="ALL/portraitbonnet.jpg" style="object-position: 50% 50%; transform: scale(1.0);">
+      <div class="overlay">Mignonne</div>
     </div>
     <div class="image-wrapper">
-      <img src="photos/chapeau.jpg" alt="Memory 2">
-      <div class="overlay">That rainy evening</div>
+      <img src="ALL/Belle.jpg" style="object-position: 50% 50%; transform: scale(1.0);">
+      <div class="overlay">Belle</div>
     </div>
     <div class="image-wrapper">
-      <img src="photos/chapeau.jpg" alt="Memory 3">
-      <div class="overlay">Your birthday smile</div>
+      <img src="ALL/matcha.jpg" style="object-position: 50% 50%; transform: scale(1.0);">
+      <div class="overlay">Douce</div>
     </div>
     <div class="image-wrapper">
-      <img src="photos/chapeau.jpg" alt="Memory 4">
-      <div class="overlay">The trip surprise</div>
+      <img src="ALL/plage.jpg" style="object-position: 50% 50%; transform: scale(2.0);">
+      <div class="overlay">Rayonnante</div>
     </div>
   </div>
 
@@ -87,6 +93,7 @@
     document.querySelectorAll('.overlay').forEach(overlay => {
       overlay.addEventListener('click', () => {
         overlay.classList.add('fade-out');
+        overlay.parentElement.classList.add('revealed'); // remove blur
       });
     });
   </script>

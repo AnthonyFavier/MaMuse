@@ -25,7 +25,7 @@
     .image-wrapper {
       position: relative;
       width: 200px;
-      height: 300px;
+      height: 200px;
       border-radius: 16px;
       overflow: hidden;
       border: 2px solid #333;
@@ -36,13 +36,12 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: blur(12px); /* initially blurred */
     }
 
     .overlay {
       position: absolute;
       inset: 0;
-      background-color: rgba(14, 182, 70, 0.336);
+      background-color: rgba(0, 0, 0, 1);
       color: white;
       font-size: 16px;
       font-weight: bold;
@@ -61,26 +60,21 @@
       border-color: transparent;
       pointer-events: none;
     }
-
-    .image-wrapper.revealed img {
-      filter: blur(0); /* remove blur on reveal */
-    }
   </style>
 </head>
-
 <body>
-  <h1>Je t'aime car tu es:</h1>
+  <h1>Click to Reveal the Memories</h1>
   <div class="gallery">
     <div class="image-wrapper">
       <img src="photos/chapeau.jpg" alt="Memory 1">
       <div class="overlay">Our first walk</div>
     </div>
     <div class="image-wrapper">
-      <img src="photos/etang2.jpg" alt="Memory 2">
+      <img src="photos/chapeau.jpg" alt="Memory 2">
       <div class="overlay">That rainy evening</div>
     </div>
     <div class="image-wrapper">
-      <img src="photos/feuartifice.jpg" alt="Memory 3">
+      <img src="photos/chapeau.jpg" alt="Memory 3">
       <div class="overlay">Your birthday smile</div>
     </div>
     <div class="image-wrapper">
@@ -93,7 +87,6 @@
     document.querySelectorAll('.overlay').forEach(overlay => {
       overlay.addEventListener('click', () => {
         overlay.classList.add('fade-out');
-        overlay.parentElement.classList.add('revealed'); // remove blur
       });
     });
   </script>
