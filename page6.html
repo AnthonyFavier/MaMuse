@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Memory Reveals</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1>Je t'aime <br> pour toutes ces aventures :</h1>
+  <div class="gallery">
+    <div class="image-wrapper">
+      <img src="final/velo.jpg" style="object-position: 50% 50%; transform: scale(2.3) translate(-8%, 8%);">
+      <div class="overlay">La chariotte</div>
+    </div>
+    <div class="image-wrapper">
+      <img src="final/disney.jpg" style="object-position: 40% 50%; transform: scale(1.0) translate(0%, 0%);">
+      <div class="overlay">Mickey time</div>
+    </div>
+    <div class="image-wrapper">
+      <img src="final/japon.jpg" style="object-position: 50% 50%; transform: scale(1.0) translate(0%, 0%);">
+      <div class="overlay">愛してる</div>
+    </div>
+    <div class="image-wrapper">
+      <img src="final/boston.jpg" style="object-position: 50% 50%; transform: scale(1.0) translate(0%, 0%);">
+      <div class="overlay">Grand périple</div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.overlay').forEach(overlay => {
+      overlay.addEventListener('click', () => {
+        overlay.classList.add('fade-out');
+        overlay.parentElement.classList.add('revealed'); // remove blur
+      });
+    });
+  </script>
+
+    <button onclick="window.location.href='float.html'" style="margin-top: 40px; padding: 10px 20px; font-size: 16px; border-radius: 8px; border: none; background-color: #333; color: white; cursor: pointer;">
+    Go to the next surprise
+  </button>
+</body>
+</html>

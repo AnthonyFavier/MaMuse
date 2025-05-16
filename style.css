@@ -1,17 +1,63 @@
-
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #fff8f0;
     text-align: center;
-    padding: 50px;
-    background-color: #fef8f0;
-    color: #333;
+    padding: 40px;
 }
-a {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #ffb6c1;
+
+h1 {
+    margin-bottom: 40px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    gap: 30px;
+    justify-content: center;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid #333;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: blur(12px);
+    /* filter: blur(0px); */
+}
+
+.overlay {
+    /* opacity: 0; */
+    position: absolute;
+    inset: 0;
+    background-color: rgba(14, 182, 70, 0.336);
     color: white;
-    text-decoration: none;
-    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: opacity 0.6s ease, border-color 0.6s ease;
+}
+
+.overlay.fade-out {
+    opacity: 0;
+    border-color: transparent;
+    pointer-events: none;
+}
+
+.image-wrapper.revealed img {
+    filter: blur(0); /* remove blur on reveal */
 }

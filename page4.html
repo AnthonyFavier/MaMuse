@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Memory Reveals</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1>Je t'aime <br> pour tes côtés :</h1>
+  <div class="gallery">
+    <div class="image-wrapper">
+      <img src="final/star.jpg" style="transform: scale(1.0) translate(0%, 0%);">
+      <div class="overlay">Pro de la pose</div>
+    </div>
+    <div class="image-wrapper">
+      <img src="final/phone.jpg" style="object-position: 10% 100%; transform: scale(1.1) translate(0%, 0%);">
+      <div class="overlay">Actrice de cinéma</div>
+    </div>
+    <div class="image-wrapper">
+      <img src="final/chapeau.jpg" style="object-position: 100% 50%; transform: scale(1.2) translate(-7%, 0%);">
+      <div class="overlay">Elégante</div>
+    </div>
+    <div class="image-wrapper">
+      <img src="final/pose.jpg" style="transform: scale(1.0) translate(0%, 0%);">
+      <div class="overlay">Hollywood Star</div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.overlay').forEach(overlay => {
+      overlay.addEventListener('click', () => {
+        overlay.classList.add('fade-out');
+        overlay.parentElement.classList.add('revealed'); // remove blur
+      });
+    });
+  </script>
+
+    <button onclick="window.location.href='page5.html'" style="margin-top: 40px; padding: 10px 20px; font-size: 16px; border-radius: 8px; border: none; background-color: #333; color: white; cursor: pointer;">
+    Go to the next surprise
+  </button>
+</body>
+</html>
